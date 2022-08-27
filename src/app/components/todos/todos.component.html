@@ -1,0 +1,59 @@
+<div class="todo__container">
+
+  <!-- Alert Message if input is empty -->
+  <div *ngIf="emptyError" class="alert alert-warning fs-5" role="alert">
+    <i class="fa-solid fa-triangle-exclamation me-3 fs-3"></i>
+    {{ alertMessage }}
+  </div>
+
+  <div class="w-100 d-flex gap-3 mb-4">
+    <input type="text" [(ngModel)]="inputTodo" class="form-control form-control-lg" placeholder="Enter ToDo Content" (keyup.enter)="addNewToDo()">
+    <button type="button" (click)="addNewToDo()" ad class="btn btn-primary btn-lg" >Add Todo</button>
+  </div>
+
+  <h1>{{ inputTodo }}</h1>
+  
+  <hr />
+  
+  <div class="todos">
+    <div 
+      *ngFor="let todo of todos; let i = index;" 
+      [ngClass]="{ 'completed' : todo.completed }"
+      class="todos__items">
+
+      <input class="form-control form-control-lg mb-3" type="text" 
+        *ngIf="!todo.completed && todo.editMode" 
+        [(ngModel)]="todoEditItem" (keyup.enter)="updateItem(todo.id)"
+        placeholder="Enter ToDo Content">
+
+      <div class="d-flex gap-4 align-items-center justify-content-between">
+        <div>
+          <h3 class="fw-light mb-3" [ngClass]="{ 'text-decoration-line-through': todo.completed }">
+            {{ todo.content | titlecase }}
+          </h3>
+          <span class="badge rounded-pill" 
+            [ngClass]="[todo.completed ? 'text-bg-success' : 'text-bg-warning']">
+            {{ todo.status | titlecase }}
+          </span>
+        </div>
+        <div class="btns d-flex gap-2">
+          <button type="button" class="btn btn-success" (click)="taskCompleted(todo.id)" [disabled]="todo.completed">
+            <i class="fas fa-check"></i>
+          </button>
+          <button type="button" class="btn btn-info" (click)="editTask(todo.id)">
+            <i class="fas fa-pencil"></i>
+          </button>
+          <button type="button" class="btn btn-danger" (click)="deleteTask(todo.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="todos.length <= 0" class="alert alert-info d-flex flex-column gap-4 align-items-center p-5" role="alert">
+      <i class="fa-solid fa-list-check fs-1"></i>
+      <p class="fs-4 m-0">You don't have any todo items. Create a new one</p>
+    </div>
+  </div>
+
+</div>
