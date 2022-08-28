@@ -5,6 +5,22 @@
   justify-content: center;
   color: var(--bs-light);
   padding: 10vh;
+  isolation: isolate;
+  overflow: hidden;
+  &::after {
+    height: 100%;
+    content: '\f420';
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+    position: absolute;
+    bottom: 0;
+    left: -7vw;
+    opacity: .025;
+    z-index: -1;
+    font-size: max(35vw, 10rem);
+    display: flex;
+    align-items: center;
+  }
 }
 header {
   top: 0;
