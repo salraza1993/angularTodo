@@ -6,10 +6,10 @@
     {{ alertMessage }}
   </div>
 
-  <div class="w-100 d-flex gap-3 mb-4">
-    <input type="text" [(ngModel)]="inputTodo" class="form-control form-control-lg" placeholder="Enter ToDo Content" (keyup.enter)="addNewToDo()">
+  <form class="w-100 d-flex gap-3 mb-4">
+    <input name="inputTodo" type="text" [(ngModel)]="inputTodo" class="form-control form-control-lg" placeholder="Enter ToDo Content" (keyup.enter)="addNewToDo()">
     <button type="button" (click)="addNewToDo()" ad class="btn btn-primary btn-lg" >Add Todo</button>
-  </div>
+  </form>
 
   <h1>{{ inputTodo }}</h1>
   
@@ -29,10 +29,10 @@
       <div class="d-flex gap-4 align-items-center justify-content-between">
         <div>
           <h3 class="fw-light mb-3" [ngClass]="{ 'text-decoration-line-through': todo.completed }">
-            {{ todo.content | titlecase }}
+            {{ todo.content }}
           </h3>
           <span class="badge rounded-pill" 
-            [ngClass]="[todo.completed ? 'text-bg-success' : 'text-bg-warning']">
+            [ngClass]="[ todo.completed ? 'text-bg-success' : 'text-bg-warning']">
             {{ todo.status | titlecase }}
           </span>
         </div>

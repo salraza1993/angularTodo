@@ -24,7 +24,7 @@ export class TodosComponent implements OnInit {
     {
       id: uuid.v4(),
       content: 'I have to learn more abouy AngularJs',
-      status: 'Completed',
+      status: 'in-progress',
       editMode: false,
       completed: false,
     },
@@ -33,7 +33,7 @@ export class TodosComponent implements OnInit {
       content: 'Once, I will finish my dinner, I will get back to learn more about AngularJs',
       status: 'in-progress',
       editMode: false,
-      completed: true,
+      completed: false,
     },
   ];
 
@@ -62,7 +62,7 @@ export class TodosComponent implements OnInit {
     this.todos.map((item:any) => {
       if (item.id === itemId) {
         item.completed = !item.completed;
-        item.status = item.status !== 'completed' ? 'completed' : 'in-progress';
+        item.status = item.status === 'in-progress' && item.completed ? 'completed' : 'in-progress';
       };
       return item;
     })
